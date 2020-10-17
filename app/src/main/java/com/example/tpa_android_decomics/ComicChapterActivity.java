@@ -35,6 +35,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -166,7 +167,7 @@ public class ComicChapterActivity extends AppCompatActivity {
                 checkRating(uid);
                 setRatingBar(uid, currid);
 
-                ComicAdapter comAdapter = new ComicAdapter(ctx,comChaps);
+                ComicAdapter comAdapter = new ComicAdapter(ctx,comChaps, uid);
                 recView.setAdapter(comAdapter);
                 recView.setLayoutManager(new LinearLayoutManager(ctx));
             }
@@ -303,10 +304,12 @@ public class ComicChapterActivity extends AppCompatActivity {
         ArrayList<ComicChapter> chapters;
         Context ctx;
         final static String EXTRA_ID = "asd";
+        String id;
 
-        public ComicAdapter(Context ctx,ArrayList<ComicChapter> chapters){
+        public ComicAdapter(Context ctx,ArrayList<ComicChapter> chapters, String id){
             this.ctx = ctx;
             this.chapters = chapters;
+            this.id = id;
         }
 
         @NonNull
@@ -320,8 +323,22 @@ public class ComicChapterActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ComicAdapter.MyViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull ComicAdapter.MyViewHolder holder, final int position) {
             holder.myText.setText(chapters.get(position).getName());
+
+            holder.cv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(ctx, chapters.get(position).getName(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(v.getContext(), ReadComicActivity.class);
+                    intent.putExtra("comicId", id);
+
+                    intent.putExtra("position", chapters.get(position).getId());
+
+                    v.getContext().startActivity(intent);
+                }
+            });
+
         }
 
         @Override
@@ -332,10 +349,12 @@ public class ComicChapterActivity extends AppCompatActivity {
         public class MyViewHolder extends RecyclerView.ViewHolder {
 
             TextView myText;
+            CardView cv;
 
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
                 myText = itemView.findViewById(R.id.chapterName);
+                cv = itemView.findViewById(R.id.comChapCard);
             }
         }
     }
