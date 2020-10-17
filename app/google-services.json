@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "808968315676",
+    "firebase_url": "https://tpaandroid-135af.firebaseio.com",
+    "project_id": "tpaandroid-135af",
+    "storage_bucket": "tpaandroid-135af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:808968315676:android:aa33b8ea8971cde01e90d9",
+        "android_client_info": {
+          "package_name": "com.example.tpa_android_decomics"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "808968315676-69ml6nopd3j13b3ng6d0ppifdi7t1c70.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsn1ZDxx0Buopd_xCOxV4GTXwjruV80Ug"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "808968315676-69ml6nopd3j13b3ng6d0ppifdi7t1c70.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

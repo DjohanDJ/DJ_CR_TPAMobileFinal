@@ -1,0 +1,99 @@
+<resources>
+    <string name="app_name">De Comics</string>
+    <string name="login">Login</string>
+    <string name="placeholder_email">example@example.com</string>
+    <string name="placeholder_pass">password here</string>
+    <string name="button_sign_in">SIGN IN</string>
+    <string name="button_sign_up">SIGN UP</string>
+    <string name="email_error">Email must be filled</string>
+    <string name="pass_error">Password must be filled</string>
+    <string name="sign_up_error">This email already taken, please choose another email</string>
+    <string name="sign_in_message">You are logged in!</string>
+    <string name="sign_in_error">Invalid Credential!</string>
+
+    <string name="create_account_label">Create your account</string>
+    <string name="placeholder_username">Username</string>
+    <string name="placeholder_password_register">Type your password</string>
+    <string name="placeholder_re_password">Re-type your password</string>
+
+    <string name="username_validation">Username must not be empty</string>
+    <string name="userPass_validation">Password must more than 7</string>
+    <string name="userRePass_validation">Re-Password must be match with password</string>
+    <string name="userEmail_validation">Email must be in email format and unique</string>
+
+    <string name="google_sign_in">or sign in with google</string>
+    <string name="google_button">GOOGLE SIGN IN</string>
+
+    <string name="sign_google_error">Sign in Failed</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="search_fragment">Search for users and comics</string>
+
+    <string name="comics">Comics</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+
+    <string name="recommended">Recommended</string>
+    <string name="top5">Top 5</string>
+
+    <string name="description">Description</string>
+    <string name="follow">Follow</string>
+    <string name="rating">Rating : </string>
+    <string name="genre">Genre : </string>
+
+    <string name="upload_comic">Upload Comic</string>
+    <string name="upload_question">What do you want to upload ?</string>
+    <string name="newComic">New Comic</string>
+    <string name="existComic">Existing Comic</string>
+
+    <string name="uploadNewComic">Upload New Comic</string>
+    <string name="uploadExistComic">Upload Chapter</string>
+
+    <string name="placeholder_comic_name">Comic Name</string>
+    <string name="placeholder_comic_desc">Description</string>
+    <string name="chooseImage">Choose Thumbnail Image</string>
+    <string name="chooseFile">Choose File</string>
+    <string name="submit">Submit</string>
+
+    <string-array name="genre_comic">
+        <item>Romance</item>
+        <item>Horror</item>
+        <item>Fantasy</item>
+    </string-array>
+
+    <string name="comicNameEmp">Comic name must not be empty</string>
+    <string name="chapterNameEmp">Chapter name must not be empty</string>
+    <string name="synopsis">Synopsis must be more than 19 characters</string>
+    <string name="thumbnail">Thumbnail image must not be empty</string>
+    <string name="chapterImg">Chapter image must not be empty</string>
+    <string name="uploadSuccess">Upload Successful</string>
+
+    <string name="chooseComic">Please choose the comic</string>
+    <string name="UploadExistingCom">Upload Existing Comic</string>
+    <string name="chapterName">Chapter Name</string>
+    <string name="UploadChapter">Upload your comic(s)</string>
+    <string name="saveChap">Commit</string>
+
+    <string name="messageAgain">You can upload as many as you want. Choose file first, then you must COMMIT. At the end you may finish to see the chapter.</string>
+    <string name="messageFile">Uploaded file(s): </string>
+
+    <string name="finishChap">Finish &amp; See Chapter</string>
+
+    <string name="uploadStillPro">Upload still in progress</string>
+
+    <string name="buya">Buy success, check your email to claim the premium membership</string>
+    <string name="rom">Romance</string>
+    <string name="fan">Fantasy</string>
+    <string name="hor">Horror</string>
+    <string name="premium">Premium Membership</string>
+    <string name="asd">With premium member, you can access the premium comics freely. Click the button to purchase the membership</string>
+    <string name="qwe">Your membership already upgraded to premium and you can access the premium content freely</string>
+    <string name="buy">Buy</string>
+
+    <string name="comik">Comics</string>
+    <string name="user">Users</string>
+
+
+
+</resources>

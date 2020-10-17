@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1368253718/DJ_CR_TPA_Android_DeComic-TPA_Android_DeComics.iml" filepath="$PROJECT_DIR$/.idea/modules/1368253718/DJ_CR_TPA_Android_DeComic-TPA_Android_DeComics.iml" group="TPA_Android_DeComics" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1368253718/TPA_Android_DeComics.iml" filepath="$PROJECT_DIR$/.idea/modules/1368253718/TPA_Android_DeComics.iml" group="TPA_Android_DeComics" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TPA_Android_DeComics-app.iml" filepath="$PROJECT_DIR$/.idea/modules/TPA_Android_DeComics-app.iml" group="TPA_Android_DeComics/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app.iml" group="TPA_Android_DeComics/app" />
+    </modules>
+  </component>
+</project>

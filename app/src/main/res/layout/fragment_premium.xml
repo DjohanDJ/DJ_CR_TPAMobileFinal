@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PremiumFragment"
+    android:orientation="vertical">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/titlePremium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/premium"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:textSize="35dp"/>
+
+    <TextView
+        android:id="@+id/notPremiumText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/asd"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/premiumText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/qwe"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/buyBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/buy"
+        android:layout_marginTop="20dp"
+        />
+
+</LinearLayout>
