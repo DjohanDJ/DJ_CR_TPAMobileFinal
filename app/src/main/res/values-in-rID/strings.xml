@@ -62,11 +62,12 @@
     <string name="buya">Pembelian berhasil, perhatikan email kamu untuk mendapatin akses premium</string>
     <string name="rom">Romansa</string>
     <string name="fan">Fantasi</string>
-    <string name="hor">Kengerian</string>
+    <string name="hor">Horor</string>
     <string name="premium">Keanggotaan Premium</string>
     <string name="asd">Dengan keanggotaan premium, kamu bisa akses komik premium dengan bebas. Klik dibawah untuk melakukan pembayaran</string>
     <string name="qwe">Keanggotaan kamu sudah diperbarui menjadi premium, kamu bisa akses konten premium dengan bebas</string>
     <string name="buy">Beli</string>
     <string name="comik">Komik</string>
     <string name="user">Pengguna</string>
+    <string name="send">Kirim</string>
 </resources>

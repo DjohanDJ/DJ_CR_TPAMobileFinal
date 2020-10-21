@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tpa_android_decomics.models.Comic;
@@ -123,6 +125,7 @@ public class UploadNewComicActivity extends AppCompatActivity {
     private void initializeAttribute() {
         this.dropdownGenre = findViewById(R.id.dropdownGenreId);
         this.dropdownGenre.setAdapter(new ArrayAdapter<>(UploadNewComicActivity.this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.genre_comic)));
+//        ((TextView) (this.dropdownGenre.getItemAtPosition(1))).setTextColor(Color.BLUE);
         this.chooseFileBtn = findViewById(R.id.chooseFileId);
         this.mImageView = findViewById(R.id.mainImageId);
         this.comicName = findViewById(R.id.comicNameId);

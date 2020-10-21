@@ -74,11 +74,11 @@ public class RegisterActivity extends AppCompatActivity {
                             } else {
                                 String userId = task.getResult().getUser().getUid();
                                 myRealDatabase.child("users").child(userId).child("username").setValue(username);
-                                startActivity(new Intent(RegisterActivity.this, BottomNavigationActivity.class));
                                 User newUser = new User();
                                 newUser.setUsername(username);
                                 newUser.setUserId(userId);
                                 ProfileFragment.currentUserSession = newUser;
+                                startActivity(new Intent(RegisterActivity.this, BottomNavigationActivity.class));
                             }
                         }
                     });

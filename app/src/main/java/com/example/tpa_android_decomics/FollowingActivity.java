@@ -117,7 +117,7 @@ public class FollowingActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 //                    Toast.makeText(v.getContext(), users.get(position).getUsername(), Toast.LENGTH_LONG).show();
-                    Toast.makeText(v.getContext(), "Unfollow", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(v.getContext(), "Unfollow", Toast.LENGTH_SHORT).show();
                     deleteFollowers(users.get(position).getUserId(), ProfileFragment.currentUserSession.getUserId());
                 }
             });

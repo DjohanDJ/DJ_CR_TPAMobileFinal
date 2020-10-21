@@ -81,7 +81,7 @@ public class SearchedUserFragment extends Fragment {
         @Override
         public SearchFragment.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             LayoutInflater inflater = LayoutInflater.from(context);
-            View view = inflater.inflate(R.layout.top_comic_row, parent, false);
+            View view = inflater.inflate(R.layout.card_search_row, parent, false);
 
             return new SearchFragment.MyViewHolder(view);
         }

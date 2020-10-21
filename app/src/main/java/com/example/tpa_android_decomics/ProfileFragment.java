@@ -86,7 +86,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 followButton.setVisibility(View.INVISIBLE);
                 unFollowButton.setVisibility(View.VISIBLE);
-                Toast.makeText(getActivity(), "Follow", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Follow", Toast.LENGTH_SHORT).show();
                 addFollowers(selectedUser.getUserId(), currentUserSession.getUserId());
             }
         });
@@ -98,7 +98,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 unFollowButton.setVisibility(View.INVISIBLE);
                 followButton.setVisibility(View.VISIBLE);
-                Toast.makeText(getActivity(), "Unfollow", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Unfollow", Toast.LENGTH_SHORT).show();
                 deleteFollowers(selectedUser.getUserId(), currentUserSession.getUserId());
             }
         });
@@ -118,8 +118,8 @@ public class ProfileFragment extends Fragment {
     private void getUserData(final View view) {
         if (currentUserSession != null) {
             if (selectedUser == null) {
-                unFollowButton.setVisibility(View.INVISIBLE);
-                followButton.setVisibility(View.INVISIBLE);
+                unFollowButton.setVisibility(View.GONE);
+                followButton.setVisibility(View.GONE);
                 usernameView.setText(currentUserSession.getUsername());
                 getComicsCount(currentUserSession);
                 getFollowersCount(currentUserSession);

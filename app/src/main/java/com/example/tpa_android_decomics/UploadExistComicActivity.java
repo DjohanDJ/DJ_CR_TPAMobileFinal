@@ -88,7 +88,7 @@ public class UploadExistComicActivity extends AppCompatActivity {
         @Override
         public UploadExistComicActivity.ComicAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             LayoutInflater inflater = LayoutInflater.from(ctx);
-            View view = inflater.inflate(R.layout.top_comic_row, parent, false);
+            View view = inflater.inflate(R.layout.card_search_row, parent, false);
 
 
             return new UploadExistComicActivity.ComicAdapter.MyViewHolder(view);
