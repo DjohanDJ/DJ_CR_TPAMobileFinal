@@ -6,121 +6,140 @@
     android:layout_height="match_parent"
     tools:context=".UploadChapterActivity">
 
-    <TextView
-        android:id="@+id/textView12"
+    <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:iconifiedByDefault="false"
-        android:padding="10dp"
-        android:text="@string/uploadExistComic"
-        android:textColor="@color/black"
-        android:textSize="20sp"
+        android:layout_height="170dp"
+        android:background="@drawable/ic_wave"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="334dp"
+        android:layout_height="211dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/ic_undraw_update_uxn2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/view4"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="44dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView12" />
-
-    <EditText
-        android:id="@+id/comicNameId"
-        android:layout_width="345dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/shape"
-        android:hint="@string/chapterName"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView12"
-        app:layout_constraintStart_toStartOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="345dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:paddingLeft="10dp"
-        android:text="@string/UploadChapter"
-        android:textColor="@color/black"
-        android:textSize="15sp"
+    <ScrollView
+        android:layout_width="410dp"
+        android:layout_height="460dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/comicNameId" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView5">
+        <LinearLayout
+            android:id="@+id/layoutText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0">
+            <EditText
+                android:id="@+id/comicNameId"
+                android:layout_width="345dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/shape"
+                android:hint="@string/chapterName"
+                android:padding="10dp"/>
 
-    <ImageView
-        android:id="@+id/mainImageId"
-        android:layout_width="191dp"
-        android:layout_height="147dp"
-        android:layout_marginTop="12dp"
-        android:src="@drawable/shape"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="345dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:paddingLeft="10dp"
+                android:text="@string/UploadChapter"
+                android:textColor="@color/black"
+                android:textSize="15sp"/>
 
-    <Button
-        android:id="@+id/chooseFileId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="28dp"
-        android:text="@string/chooseFile"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainImageId" />
+            <ImageView
+                android:id="@+id/mainImageId"
+                android:layout_width="346dp"
+                android:layout_height="213dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/shape" />
 
-    <Button
-        android:id="@+id/submitBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="@string/saveChap"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.059"
-        app:layout_constraintStart_toEndOf="@+id/chooseFileId"
-        app:layout_constraintTop_toBottomOf="@+id/mainImageId" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="25dp"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0">
 
-    <TextView
-        android:id="@+id/textView130"
-        android:layout_width="345dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:paddingLeft="10dp"
-        android:text="@string/messageAgain"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chooseFileId" />
+                <Button
+                    android:id="@+id/chooseFileId"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/button_shape"
+                    android:text="@string/chooseFile"
+                    android:textColor="@color/white" />
 
-    <TextView
-        android:id="@+id/uploadedCounter"
-        android:layout_width="345dp"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingTop="5dp"
-        android:text="@string/messageFile"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView130" />
+                <Button
+                    android:id="@+id/submitBtn"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/button_shape"
+                    android:text="@string/saveChap"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.059"
+                    app:layout_constraintStart_toEndOf="@+id/chooseFileId"
+                    app:layout_constraintTop_toBottomOf="@+id/mainImageId" />
+            </LinearLayout>
 
-    <Button
-        android:id="@+id/finishBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/finishChap"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/uploadedCounter" />
+            <TextView
+                android:id="@+id/textView130"
+                android:layout_width="345dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="10dp"
+                android:text="@string/messageAgain"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chooseFileId" />
 
+            <TextView
+                android:id="@+id/uploadedCounter"
+                android:layout_width="345dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:text="@string/messageFile"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView130" />
 
+            <Button
+                android:id="@+id/finishBtn"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/button_shape"
+                android:textColor="@color/white"
+                android:text="@string/finishChap"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/uploadedCounter" />
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

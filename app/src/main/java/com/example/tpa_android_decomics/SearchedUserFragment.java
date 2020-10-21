@@ -91,7 +91,7 @@ public class SearchedUserFragment extends Fragment {
             holder.myTitle.setText(comicsList.get(position).getUsername());
 //            SearchedComicFragment.LoadImageUrl loadImage = new SearchedComicFragment.LoadImageUrl(holder.myImage);
 //            loadImage.execute(comicsList.get(position).getImage());
-            holder.myImage.setImageResource(R.drawable.ic_baseline_account_circle_24);
+            holder.myImage.setImageResource(R.drawable.ic_undraw_profile_pic_ic5t);
 
             final String title = holder.myTitle.getText().toString();
 

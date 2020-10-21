@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "808968315676-d511lp760p29isjh7p2tam58s90cmn6q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tpa_android_decomics",
+            "certificate_hash": "537fdb328b6dee0ac90d2918c8381fbcc39634e8"
+          }
+        },
+        {
           "client_id": "808968315676-69ml6nopd3j13b3ng6d0ppifdi7t1c70.apps.googleusercontent.com",
           "client_type": 3
         }
