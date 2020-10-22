@@ -95,5 +95,7 @@
     <string name="user">Users</string>
     <string name="send">Send</string>
 
+    <string name="load">Loading...</string>
+
 
 </resources>

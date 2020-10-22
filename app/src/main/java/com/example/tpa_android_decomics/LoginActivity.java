@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.tpa_android_decomics.models.LoadingAnimation;
 import com.example.tpa_android_decomics.models.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -43,12 +46,13 @@ public class LoginActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private final static int RC_SIGN_IN = 1;
     private DatabaseReference myRealDatabase;
+    private LoadingAnimation loadingAnimation;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         doInitializeTemplates();
     }
 
@@ -68,6 +72,28 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         };
+        loadingAnimation = new LoadingAnimation(LoginActivity.this);
+        sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+        final String currentUserId = sharedPreferences.getString("user_userId", "");
+        if (!currentUserId.equals("")) {
+            myRealDatabase.child("users").child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    User user = new User();
+                    user.setUserId(currentUserId);
+                    user.setUsername(snapshot.child("username").getValue().toString());
+                    ProfileFragment.currentUserSession = user;
+                    Intent intent = new Intent(LoginActivity.this, BottomNavigationActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
         doCheckSignInButton();
         doCheckSignUpButton();
         createRequest();
@@ -132,6 +158,11 @@ public class LoginActivity extends AppCompatActivity {
                             newUser.setUsername(user.getDisplayName());
                             newUser.setUserId(userId);
                             ProfileFragment.currentUserSession = newUser;
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("user_userId", userId);
+                            editor.apply();
+                            loadingAnimation.startLoading();
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(LoginActivity.this, getResources().getString(R.string.sign_google_error), Toast.LENGTH_SHORT).show();
@@ -162,6 +193,8 @@ public class LoginActivity extends AppCompatActivity {
                 } else if (password.isEmpty()) {
                     Toast.makeText(LoginActivity.this, getResources().getString(R.string.pass_error), Toast.LENGTH_SHORT).show();
                 } else {
+                    emailId.setKeyListener(null);
+                    passwordId.setKeyListener(null);
                     myFireBaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -181,7 +214,12 @@ public class LoginActivity extends AppCompatActivity {
                                                 user.setUserId(userId);
                                                 user.setUsername(dataSnapshot.child("username").getValue().toString());
                                                 ProfileFragment.currentUserSession = user;
+                                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                editor.putString("user_userId", userId);
+                                                editor.apply();
                                                 startActivity(new Intent(LoginActivity.this, BottomNavigationActivity.class));
+                                                loadingAnimation.startLoading();
+                                                finish();
                                             }
                                         }
                                     }

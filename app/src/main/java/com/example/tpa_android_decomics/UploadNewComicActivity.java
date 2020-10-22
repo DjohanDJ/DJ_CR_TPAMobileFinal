@@ -105,6 +105,7 @@ public class UploadNewComicActivity extends AppCompatActivity {
                             String uploadId = mDatabaseRef.push().getKey();
                             mDatabaseRef.child(uploadId).setValue(newComic);
                             startActivity(new Intent(UploadNewComicActivity.this, BottomNavigationActivity.class));
+                            finish();
                         }
                     });
                 }

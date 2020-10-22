@@ -70,4 +70,6 @@
     <string name="comik">Komik</string>
     <string name="user">Pengguna</string>
     <string name="send">Kirim</string>
+
+    <string name="load">Memuat...</string>
 </resources>
