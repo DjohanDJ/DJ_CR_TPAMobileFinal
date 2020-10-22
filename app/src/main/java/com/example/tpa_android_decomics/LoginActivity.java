@@ -153,7 +153,6 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseUser user = myFireBaseAuth.getCurrentUser();
                             String userId = task.getResult().getUser().getUid();
                             myRealDatabase.child("users").child(userId).child("username").setValue(user.getDisplayName());
-                            startActivity(new Intent(LoginActivity.this, BottomNavigationActivity.class));
                             User newUser = new User();
                             newUser.setUsername(user.getDisplayName());
                             newUser.setUserId(userId);
@@ -162,6 +161,7 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString("user_userId", userId);
                             editor.apply();
                             loadingAnimation.startLoading();
+                            startActivity(new Intent(LoginActivity.this, BottomNavigationActivity.class));
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
