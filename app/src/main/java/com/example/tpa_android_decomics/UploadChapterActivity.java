@@ -166,7 +166,7 @@ public class UploadChapterActivity extends AppCompatActivity {
                             newChapter.setName(chapterName.getText().toString());
                             newChapter.setImage(uri.toString());
                             String uploadId = mDatabaseRef.push().getKey();
-                            mDatabaseRef.child(uploadId).setValue(newChapter);
+                            mDatabaseRef.child(newChapter.getName()).child(uploadId).setValue(newChapter);
                             mImageView.setImageResource(R.drawable.shape);
                             imageHolder = false;
                             countUpload++;
