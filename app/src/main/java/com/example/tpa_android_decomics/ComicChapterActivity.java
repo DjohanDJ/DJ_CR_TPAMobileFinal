@@ -94,7 +94,7 @@ public class ComicChapterActivity extends AppCompatActivity {
         follow = findViewById(R.id.button);
         errText = findViewById(R.id.errorText);
         line = findViewById(R.id.view2);
-        rate =  findViewById(R.id.button2);
+//        rate =  findViewById(R.id.button2);
         bar = findViewById(R.id.ratingBar2);
 
 
@@ -102,7 +102,7 @@ public class ComicChapterActivity extends AppCompatActivity {
 
         myDatabase = FirebaseDatabase.getInstance().getReference();
 
-        myDatabase.addValueEventListener(new ValueEventListener() {
+        myDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 comChaps.clear();
@@ -153,8 +153,8 @@ public class ComicChapterActivity extends AppCompatActivity {
                 String premium = snapshot.child("comics").child(uid).child("premium").getValue().toString();
 
                 if(premium.equals("true")){
-                    if(!firebaseAuth.getCurrentUser().isEmailVerified()){
-                        rate.setVisibility(View.GONE);
+                    if(!firebaseAuth.getCurrentUser().isEmailVerified() && !comicUID.equals(ProfileFragment.currentUserSession.getUserId())){
+//                        rate.setVisibility(View.GONE);
                         bar.setVisibility(View.GONE);
                         errText.setVisibility(View.VISIBLE);
                         recView.setVisibility(View.GONE);
@@ -182,7 +182,7 @@ public class ComicChapterActivity extends AppCompatActivity {
     }
 
     public void setRatingBar(final String comicId, final String currId){
-        rate =  findViewById(R.id.button2);
+//        rate =  findViewById(R.id.button2);
         bar = findViewById(R.id.ratingBar2);
 //        bar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
 //            @Override
@@ -190,15 +190,15 @@ public class ComicChapterActivity extends AppCompatActivity {
 //
 //            }
 //        });
-        rate.setOnClickListener(new View.OnClickListener() {
+        bar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
-            public void onClick(View v) {
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 float value = bar.getRating();
                 int val = (int)value;
 
                 userDatabase = FirebaseDatabase.getInstance().getReference("comics").child(comicId).child("rating").child(currId);
                 userDatabase.child("ratingValue").setValue(val);
-                Toast.makeText(ComicChapterActivity.this, "Send rate success", Toast.LENGTH_SHORT).show();
+
                 if(isRated){
                     isRated = true;
                 }else{
@@ -206,6 +206,23 @@ public class ComicChapterActivity extends AppCompatActivity {
                 }
             }
         });
+
+//        rate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                float value = bar.getRating();
+//                int val = (int)value;
+//
+//                userDatabase = FirebaseDatabase.getInstance().getReference("comics").child(comicId).child("rating").child(currId);
+//                userDatabase.child("ratingValue").setValue(val);
+//                Toast.makeText(ComicChapterActivity.this, "Send rate success", Toast.LENGTH_SHORT).show();
+//                if(isRated){
+//                    isRated = true;
+//                }else{
+//                    isRated = true;
+//                }
+//            }
+//        });
 
     }
 
