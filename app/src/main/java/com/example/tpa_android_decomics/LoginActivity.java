@@ -184,7 +184,7 @@ public class LoginActivity extends AppCompatActivity {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email, password;
+                final String email, password;
                 email = emailId.getText().toString();
                 password = passwordId.getText().toString();
 
@@ -200,6 +200,8 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (!task.isSuccessful()) {
                                 Toast.makeText(LoginActivity.this, getResources().getString(R.string.sign_in_error), Toast.LENGTH_SHORT).show();
+                                emailId.setKeyListener(new EditText(getApplicationContext()).getKeyListener());
+                                passwordId.setKeyListener(new EditText(getApplicationContext()).getKeyListener());
                             } else {
                                 // TODO Pas login disini, harus invite.
                                 final String userId = task.getResult().getUser().getUid();
