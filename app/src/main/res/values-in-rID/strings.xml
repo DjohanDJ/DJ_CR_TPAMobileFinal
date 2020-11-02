@@ -72,4 +72,15 @@
     <string name="send">Kirim</string>
 
     <string name="load">Memuat...</string>
+
+    <string name="addcomment">Tambah komentar..</string>
+    <string name="replycomment">Balas komentar..</string>
+    <string name="reply">Balas</string>
+    <string name="hidereply">Sembunyikan balasan</string>
+
+    <string name="add">Tambah</string>
+
+
+    <string name="comment">Komentar</string>
+
 </resources>

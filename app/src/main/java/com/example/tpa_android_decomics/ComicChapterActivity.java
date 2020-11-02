@@ -67,7 +67,7 @@ public class ComicChapterActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
 
-    ArrayList<ComicChapter> comChaps = new ArrayList<>();
+    public static ArrayList<ComicChapter> comChaps = new ArrayList<>();
 
 
 
@@ -144,7 +144,7 @@ public class ComicChapterActivity extends AppCompatActivity {
 
                 for(DataSnapshot data : snapshot.child("comics").child(uid).child("chapters").getChildren()){
                     ComicChapter chap = new ComicChapter();
-                    chap.setName(data.child("name").getValue().toString());
+                    chap.setName(data.getKey());
                     chap.setId(data.getKey());
 
                     comChaps.add(chap);
@@ -346,16 +346,15 @@ public class ComicChapterActivity extends AppCompatActivity {
             holder.cv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(ctx, chapters.get(position).getName(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(ctx, chapters.get(position).getName(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(v.getContext(), ReadComicActivity.class);
                     intent.putExtra("comicId", id);
-
+                    intent.putExtra("post", String.valueOf(position));
                     intent.putExtra("position", chapters.get(position).getId());
 
                     v.getContext().startActivity(intent);
                 }
             });
-
         }
 
         @Override
