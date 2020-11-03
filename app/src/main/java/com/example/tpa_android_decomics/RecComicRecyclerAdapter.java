@@ -38,7 +38,7 @@ public class RecComicRecyclerAdapter extends RecyclerView.Adapter<RecComicRecycl
     @Override
     public RecComicRecyclerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(ctx);
-        View view = inflater.inflate(R.layout.top_comic_row, parent, false);
+        View view = inflater.inflate(R.layout.rec_comic_row, parent, false);
 
         return new RecComicRecyclerAdapter.MyViewHolder(view);
     }

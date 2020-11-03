@@ -56,6 +56,7 @@
         android:layout_marginTop="10dp"
         android:text="@string/follow"
         android:textSize="8sp"
+        android:background="@drawable/following_shape"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         />

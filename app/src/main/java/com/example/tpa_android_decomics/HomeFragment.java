@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
@@ -112,7 +113,9 @@ public class HomeFragment extends Fragment {
 
                 RecComicRecyclerAdapter recAdapter = new RecComicRecyclerAdapter(view.getContext(),recComic);
                 recyclerView.setAdapter(recAdapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(view.getContext(), 1, GridLayoutManager.HORIZONTAL, false);
+                recyclerView.setLayoutManager(gridLayoutManager);
+                recyclerView.setHasFixedSize(true);
 
 
             }
@@ -123,12 +126,12 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        recyclerView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
-            }
-        });
+//        recyclerView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                return true;
+//            }
+//        });
 
 
 //        adapter view pager

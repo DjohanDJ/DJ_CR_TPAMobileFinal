@@ -50,6 +50,9 @@ public class TopComicRecyclerAdapter extends RecyclerView.Adapter<TopComicRecycl
         LoadImageUrl loadImage = new LoadImageUrl(holder.myImage);
         loadImage.execute(topList.get(position).getImage());
 
+
+        holder.countNumber.setText(String.valueOf(position+1));
+
         final String title = holder.myTitle.getText().toString();
 
         holder.cv.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +74,7 @@ public class TopComicRecyclerAdapter extends RecyclerView.Adapter<TopComicRecycl
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView myTitle;
+        TextView myTitle, countNumber;
         ImageView myImage;
         CardView cv;
 
@@ -80,6 +83,7 @@ public class TopComicRecyclerAdapter extends RecyclerView.Adapter<TopComicRecycl
             myTitle = itemView.findViewById(R.id.titleRow);
             myImage = itemView.findViewById(R.id.imageRow);
             cv = itemView.findViewById(R.id.cardView);
+            countNumber = itemView.findViewById(R.id.countNumber);
         }
     }
 

@@ -12,31 +12,55 @@
    <androidx.cardview.widget.CardView
        android:id="@+id/cardView"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content">
+       android:layout_height="50dp">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingLeft="2px"
             >
 
-            <ImageView
-                android:id="@+id/imageRow"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+            <TextView
+                android:id="@+id/countNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="1"
+                android:textColor="@color/black"
+
+                android:textSize="16dp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/ic_banner" />
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@id/cardView"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="20dp"
+                android:background="@color/white"
+                app:cardCornerRadius="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/countNumber"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imageRow"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    app:srcCompat="@mipmap/ic_banner" />
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/titleRow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="12dp"
                 android:text="Testing Text"
                 android:textColor="@color/black"
                 android:textSize="16dp"
-                app:layout_constraintStart_toEndOf="@+id/imageRow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cardView"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -48,3 +72,4 @@
 
 
 </LinearLayout>
+
