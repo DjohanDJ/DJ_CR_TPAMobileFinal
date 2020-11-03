@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ public class PremiumFragment extends Fragment {
 
     TextView notPremTxt;
     TextView premTxt;
+    ImageView imageGift, premGift;
     Button btn;
     FirebaseAuth auth;
     FirebaseUser user;
@@ -58,15 +60,20 @@ public class PremiumFragment extends Fragment {
         premTxt = view.findViewById(R.id.premiumText);
         notPremTxt = view.findViewById(R.id.notPremiumText);
         btn = view.findViewById(R.id.buyBtn);
+        imageGift = view.findViewById(R.id.imageBuy);
+        premGift = view.findViewById(R.id.premiumGift);
 
-         auth = FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance();
          user = auth.getCurrentUser();
 
         if(!user.isEmailVerified()){
             premTxt.setVisibility(View.GONE);
+            premGift.setVisibility(View.GONE);
         }else{
             notPremTxt.setVisibility(View.GONE);
             btn.setVisibility(View.GONE);
+            imageGift.setVisibility(View.GONE);
+
         }
     
 

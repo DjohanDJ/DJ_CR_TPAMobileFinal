@@ -15,17 +15,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/chapterName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="testing Chapter name"
-            android:textSize="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"/>
+            <ImageView
+                android:id="@+id/imageChapter"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@mipmap/ic_banner"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/chapterName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:text="testing Chapter name"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                app:layout_constraintStart_toEndOf="@+id/imageChapter"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/likeImageCount"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/notlike"
+                app:layout_constraintStart_toEndOf="@+id/imageChapter"
+                app:layout_constraintTop_toBottomOf="@+id/chapterName" />
+
+            <TextView
+                android:id="@+id/chapterLikeCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:text="300"
+                android:textSize="13sp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@+id/likeImageCount"
+                app:layout_constraintTop_toBottomOf="@+id/chapterName" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 

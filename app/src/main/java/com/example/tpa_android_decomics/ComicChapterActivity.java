@@ -11,6 +11,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -50,7 +52,7 @@ public class ComicChapterActivity extends AppCompatActivity {
     private DatabaseReference userDatabase;
 
     RecyclerView recView;
-    ImageView img;
+    ImageView img, lockImage;
     TextView title;
     TextView author;
     TextView rating;
@@ -89,6 +91,7 @@ public class ComicChapterActivity extends AppCompatActivity {
         title = findViewById(R.id.textView);
         author = findViewById(R.id.textView2);
         rating = findViewById(R.id.textView11);
+
         genre = findViewById(R.id.textView9);
         desc = findViewById(R.id.textView8);
         follow = findViewById(R.id.button);
@@ -96,6 +99,8 @@ public class ComicChapterActivity extends AppCompatActivity {
         line = findViewById(R.id.view2);
 //        rate =  findViewById(R.id.button2);
         bar = findViewById(R.id.ratingBar2);
+        lockImage = findViewById(R.id.lockImage);
+
 
 
 
@@ -147,6 +152,28 @@ public class ComicChapterActivity extends AppCompatActivity {
                     chap.setName(data.getKey());
                     chap.setId(data.getKey());
 
+                    ArrayList<String> imageUrl = new ArrayList<>();
+
+                    for(DataSnapshot image : data.getChildren()){
+                        if(image.hasChild("image")){
+                            imageUrl.add(image.child("image").getValue().toString());
+                        }
+                    }
+                    chap.setImageUrl(imageUrl);
+
+                    int totalLike = 0;
+                    int totalDislike = 0;
+
+                    if(data.hasChild("like")){
+                        for(DataSnapshot like : data.child("like").getChildren()){
+                            if(like.getValue().toString().equals("true")) totalLike++;
+                            else totalDislike++;
+                        }
+                    }
+
+                    chap.setLike(totalLike);
+                    chap.setDislike(totalDislike);
+
                     comChaps.add(chap);
                 }
 
@@ -157,6 +184,7 @@ public class ComicChapterActivity extends AppCompatActivity {
 //                        rate.setVisibility(View.GONE);
                         bar.setVisibility(View.GONE);
                         errText.setVisibility(View.VISIBLE);
+                        lockImage.setVisibility(View.VISIBLE);
                         recView.setVisibility(View.GONE);
                         line.setVisibility(View.GONE);
                     }
@@ -169,7 +197,9 @@ public class ComicChapterActivity extends AppCompatActivity {
 
                 ComicAdapter comAdapter = new ComicAdapter(ctx,comChaps, uid);
                 recView.setAdapter(comAdapter);
-                recView.setLayoutManager(new LinearLayoutManager(ctx));
+                LinearLayoutManager layoutManager = new LinearLayoutManager(ctx);
+                layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                recView.setLayoutManager(layoutManager);
             }
 
             @Override
@@ -260,7 +290,7 @@ public class ComicChapterActivity extends AppCompatActivity {
                 }else{
                     followed = true;
                     follow.setText("Followed");
-                    follow.setTextColor(Color.GRAY);
+                    follow.setTextColor(Color.GREEN);
                     addFollowers(comicUID,currid);
 
                 }
@@ -281,7 +311,7 @@ public class ComicChapterActivity extends AppCompatActivity {
                 if(snapshot.hasChild("followers") && snapshot.child("followers").hasChild(currid)){
                     followed = true;
                     follow.setText("Followed");
-                    follow.setTextColor(Color.GRAY);
+                    follow.setTextColor(Color.GREEN);
                 }else{
                     followed = false;
                 }
@@ -342,6 +372,12 @@ public class ComicChapterActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull ComicAdapter.MyViewHolder holder, final int position) {
             holder.myText.setText(chapters.get(position).getName());
+            String countLike = String.valueOf(chapters.get(position).getLike());
+//            Toast.makeText(ctx, countLike, Toast.LENGTH_SHORT).show();
+            holder.likeCount.setText(countLike);
+
+            LoadImageUrl loadImage = new LoadImageUrl(holder.chapImage);
+            loadImage.execute(chapters.get(position).getImageUrl().get(0));
 
             holder.cv.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -364,13 +400,16 @@ public class ComicChapterActivity extends AppCompatActivity {
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
 
-            TextView myText;
+            TextView myText, likeCount;
+            ImageView chapImage;
             CardView cv;
 
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
                 myText = itemView.findViewById(R.id.chapterName);
                 cv = itemView.findViewById(R.id.comChapCard);
+                likeCount = itemView.findViewById(R.id.chapterLikeCount);
+                chapImage = itemView.findViewById(R.id.imageChapter);
             }
         }
     }
