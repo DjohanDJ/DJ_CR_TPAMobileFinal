@@ -82,12 +82,12 @@
 
     <string name="uploadStillPro">Upload still in progress</string>
 
-    <string name="buya">Buy success, check your email to claim the premium membership</string>
+    <string name="buya">Buy success, check your email to claim the premium membership and re-login</string>
     <string name="rom">Romance</string>
     <string name="fan">Fantasy</string>
     <string name="hor">Horror</string>
     <string name="premium">Premium Membership</string>
-    <string name="asd">With premium member, you can access the premium comics freely. Click the button to purchase the membership</string>
+    <string name="asd">With premium member, you can access the premium comics freely. Click the button to purchase the membership.</string>
     <string name="qwe">Your membership already upgraded to premium and you can access the premium content freely</string>
     <string name="buy">Buy</string>
 

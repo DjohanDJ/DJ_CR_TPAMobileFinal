@@ -1,5 +1,7 @@
 package com.example.tpa_android_decomics;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -55,7 +57,8 @@ public class PremiumFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View view =  inflater.inflate(R.layout.fragment_premium, container, false);
 
-
+        final Context ctx = this.getContext();
+        final PremiumFragment klass = this;
 
         premTxt = view.findViewById(R.id.premiumText);
         notPremTxt = view.findViewById(R.id.notPremiumText);
@@ -85,6 +88,9 @@ public class PremiumFragment extends Fragment {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(view.getContext(), getResources().getString(R.string.buya), Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, LoginActivity.class);
+                            ctx.startActivity(intent);
+
                         }
                     }
                 });
