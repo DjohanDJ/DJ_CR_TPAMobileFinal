@@ -45,6 +45,7 @@ public class ReadComicActivity extends AppCompatActivity {
     private DatabaseReference myDatabase;
     private DatabaseReference addCommentDatabase;
     private DatabaseReference dbCheck;
+    private DatabaseReference likeDB;
 
     RecyclerView recView;
     RecyclerView comView;
@@ -84,6 +85,32 @@ public class ReadComicActivity extends AppCompatActivity {
 
         myDatabase = FirebaseDatabase.getInstance().getReference();
 
+        dbCheck = FirebaseDatabase.getInstance().getReference().child("comics").child(id).child("chapters")
+                .child(chapterId);
+
+        dbCheck.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.hasChild("like")){
+                    if(snapshot.child("like").hasChild(ProfileFragment.currentUserSession.getUserId())){
+                        String value = snapshot.child("like").child(ProfileFragment.currentUserSession.getUserId())
+                                .getValue().toString();
+                        if(value.equals("true")){
+                            heartLike.setImageResource(R.drawable.like);
+                        }else{
+                            heartDislike.setImageResource(R.drawable.dislikered);
+
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
 
         myDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -119,13 +146,114 @@ public class ReadComicActivity extends AppCompatActivity {
                 heartLike.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        dbCheck = FirebaseDatabase.getInstance().getReference().child("comics").child(id).child("chapters")
+                                .child(chapterId);
+
+                        dbCheck.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if(snapshot.hasChild("like")){
+                                    if(snapshot.child("like").hasChild(ProfileFragment.currentUserSession.getUserId())){
+                                        likeDB = FirebaseDatabase.getInstance().getReference().child("comics").child(id).child("chapters")
+                                                .child(chapterId).child("like").child(ProfileFragment.currentUserSession.getUserId());
+                                        String value = snapshot.child("like").child(ProfileFragment.currentUserSession.getUserId())
+                                                .getValue().toString();
+                                        if(value.equals("true")){
+                                            likeDB.removeValue();
+                                            heartLike.setImageResource(R.drawable.notlike);
+
+                                            totLike[0]--;
+
+                                        }else{
+                                            likeDB.setValue("true");
+                                            heartLike.setImageResource(R.drawable.like);
+                                            heartDislike.setImageResource(R.drawable.dislikewhite);
+
+                                            totLike[0]++;
+                                            totDislike[0]--;
+                                        }
+
+                                    }else{
+                                        likeDB = FirebaseDatabase.getInstance().getReference().child("comics").child(id).child("chapters")
+                                                .child(chapterId).child("like").child(ProfileFragment.currentUserSession.getUserId());
+                                        likeDB.setValue("true");
+                                        heartLike.setImageResource(R.drawable.like);
+                                        totLike[0]++;
+                                    }
+                                }else{
+                                    likeDB = FirebaseDatabase.getInstance().getReference().child("comics").child(id).child("chapters")
+                                            .child(chapterId).child("like").child(ProfileFragment.currentUserSession.getUserId());
+                                    likeDB.setValue("true");
+                                    heartLike.setImageResource(R.drawable.like);
+                                    totLike[0]++;
+                                }
+
+                                chapterLike.setText(String.valueOf(totLike[0]));
+                                chapterDislike.setText(String.valueOf(totDislike[0]));
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
 
                     }
+
                 });
 
                 heartDislike.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        dbCheck = FirebaseDatabase.getInstance().getReference().child("comics").child(id).child("chapters")
+                                .child(chapterId);
+                        dbCheck.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if(snapshot.hasChild("like")){
+                                    if(snapshot.child("like").hasChild(ProfileFragment.currentUserSession.getUserId())){
+                                        likeDB = FirebaseDatabase.getInstance().getReference().child("comics").child(id).child("chapters")
+                                                .child(chapterId).child("like").child(ProfileFragment.currentUserSession.getUserId());
+                                        String value = snapshot.child("like").child(ProfileFragment.currentUserSession.getUserId())
+                                                .getValue().toString();
+                                        if(value.equals("false")){
+                                            likeDB.removeValue();
+                                            heartDislike.setImageResource(R.drawable.dislikewhite);
+                                            totDislike[0]--;
+                                        }else{
+                                            likeDB.setValue("false");
+                                            heartDislike.setImageResource(R.drawable.dislikered);
+                                            heartLike.setImageResource(R.drawable.notlike);
+
+                                            totLike[0]--;
+                                            totDislike[0]++;
+                                        }
+
+                                    }else{
+                                        likeDB = FirebaseDatabase.getInstance().getReference().child("comics").child(id).child("chapters")
+                                                .child(chapterId).child("like").child(ProfileFragment.currentUserSession.getUserId());
+                                        likeDB.setValue("false");
+                                        heartDislike.setImageResource(R.drawable.dislikered);
+                                        totDislike[0]++;
+                                    }
+                                }else{
+                                    likeDB = FirebaseDatabase.getInstance().getReference().child("comics").child(id).child("chapters")
+                                            .child(chapterId).child("like").child(ProfileFragment.currentUserSession.getUserId());
+                                    likeDB.setValue("false");
+                                    heartDislike.setImageResource(R.drawable.dislikered);
+                                    totDislike[0]++;
+                                }
+
+                                chapterLike.setText(String.valueOf(totLike[0]));
+                                chapterDislike.setText(String.valueOf(totDislike[0]));
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
 
                     }
                 });
@@ -135,12 +263,12 @@ public class ReadComicActivity extends AppCompatActivity {
                 ComicAdapter comAdapter = new ComicAdapter(ctx,list,id,chapterId);
                 recView.setAdapter(comAdapter);
                 recView.setLayoutManager(new LinearLayoutManager(ctx));
-                recView.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        return true;
-                    }
-                });
+//                recView.setOnTouchListener(new View.OnTouchListener() {
+//                    @Override
+//                    public boolean onTouch(View v, MotionEvent event) {
+//                        return true;
+//                    }
+//                });
 
             }
 

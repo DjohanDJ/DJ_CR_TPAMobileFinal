@@ -4,10 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +20,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,6 +66,7 @@ public class UploadChapterActivity extends AppCompatActivity {
 
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
+    private DatabaseReference dbNotif;
     private String comicSelectedId;
     private String finalMessage;
     private Integer countUpload = 0;
@@ -76,6 +83,8 @@ public class UploadChapterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_chapter);
+
+        createNotifcation();
 
         Intent intent = getIntent();
         comicSelectedId = intent.getStringExtra("asdf");
@@ -107,6 +116,21 @@ public class UploadChapterActivity extends AppCompatActivity {
 //        });
     }
 
+    void createNotifcation(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel1 = new NotificationChannel(
+                    "channel1",
+                    "Channel 1",
+                    NotificationManager.IMPORTANCE_LOW
+            );
+            channel1.setDescription("This is channel 1");
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel1);
+        }
+    }
+
+
     private void buttonChecker() {
         chooseFileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,6 +146,7 @@ public class UploadChapterActivity extends AppCompatActivity {
                     Toast.makeText(UploadChapterActivity.this, getResources().getString(R.string.uploadStillPro), Toast.LENGTH_SHORT).show();
                 } else {
                     uploadFile();
+
                 }
             }
         });
@@ -177,6 +202,9 @@ public class UploadChapterActivity extends AppCompatActivity {
                             ImageAdapter imageAdapter = new ImageAdapter(ctx, tempImages);
                             myImageRecycler.setAdapter(imageAdapter);
                             myImageRecycler.setLayoutManager(new LinearLayoutManager(ctx));
+
+                            pushNotif(newChapter, comicSelectedId);
+
                         }
                     });
                 }
@@ -192,6 +220,51 @@ public class UploadChapterActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    void pushNotif(final UploadChapter newChapter, String id){
+
+        final Context ctx = this;
+
+
+        dbNotif = FirebaseDatabase.getInstance().getReference("comics").child(comicSelectedId);
+
+        final String[] comicName = {""};
+
+        dbNotif.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                comicName[0] = snapshot.child("name").getValue().toString();
+
+                int total = 0;
+
+                for(DataSnapshot chap : snapshot.child("chapters").child(newChapter.getName()).getChildren()){
+                    total++;
+                }
+
+                if(total == 1){
+                    Notification builder = new NotificationCompat.Builder(
+                            UploadChapterActivity.this, "channel1"
+                    )
+                            .setSmallIcon(R.mipmap.ic_banner)
+                            .setContentTitle(comicName[0])
+                            .setContentText(newChapter.getName() + " has been released")
+                            .setPriority(NotificationCompat.PRIORITY_LOW)
+                            .setCategory(NotificationCompat.CATEGORY_MESSAGE).build();
+
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(ctx);
+                    notificationManager.notify(1,builder);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
     }
 
     private void openFileChooser() {
