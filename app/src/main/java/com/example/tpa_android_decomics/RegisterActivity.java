@@ -3,7 +3,9 @@ package com.example.tpa_android_decomics;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -28,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button signUpButton;
     private FirebaseAuth myFireBaseAuth;
     private DatabaseReference myRealDatabase;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void doInitializeTemplates() {
+        sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
         usernameId = findViewById(R.id.usernameId);
         emailId = findViewById(R.id.emailId);
         passwordId = findViewById(R.id.passwordId);
@@ -78,7 +82,12 @@ public class RegisterActivity extends AppCompatActivity {
                                 newUser.setUsername(username);
                                 newUser.setUserId(userId);
                                 ProfileFragment.currentUserSession = newUser;
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("user_userId", userId);
+                                editor.apply();
+                                finish();
                                 startActivity(new Intent(RegisterActivity.this, BottomNavigationActivity.class));
+
                             }
                         }
                     });
